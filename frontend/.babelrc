@@ -1,0 +1,14 @@
+{
+  "env": {
+    "development": {
+      "plugins": ["styled-components"]
+    },
+    "production": {
+      "plugins": ["styled-components"]
+    },
+    "test": {
+      "presets": ["env", "react"],
+      "plugins": ["styled-components"]
+    }
+  }
+}
