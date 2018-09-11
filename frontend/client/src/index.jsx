@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import Form from './components/Form.jsx';
+import App from './components/App.jsx';
 
 
-render(<Form />, document.getElementById('app'));
+render(<App />, document.getElementById('app'));
