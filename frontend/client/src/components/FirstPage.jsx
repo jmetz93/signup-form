@@ -5,21 +5,9 @@ import Wrapper from '../styled-components/Wrapper.jsx';
 import FormInput from './FormInput.jsx'; 
 import NextButton from '../styled-components/NextButton.jsx';
 
-const PasswordContainer = styled.div`
+const ButtonRow = styled.div`
   display: flex;
   flex-direction: row;
-`
-const ShowHideButton = styled.button`
-  float: right;
-  height: 10px;
-  width: 20px;
-  padding: 7px 14px;
-  font-size: 14px;
-  color: white;
-  border-bottom-left-radius: 3.5px;
-  border-bottom-right-radius: 3.5px;
-  border-top-left-radius: 3.5px;
-  border-top-right-radius: 3.5px;
 `
 
 export default class FirstPage extends React.Component {
@@ -27,19 +15,24 @@ export default class FirstPage extends React.Component {
     super(props);
     this.state = {
       requirementsFilled: false,
-      firstName: props.firstName,
-      lastName: props.lastName,
-      password: props.password,
-      emailAddress: props.email,
+      firstName: this.props.firstName,
+      lastName: this.props.lastName,
+      password: this.props.password,
+      emailAddress: this.props.email,
     };
-    this.handleChange = this.handleInputChange.bind(this);
   }
 
-  handleInputChange(event) {
-    console.log('val: ', event.target.value);
+  handleInputChange = (event) => {
+    console.log(event.target.value);
     this.setState({
       [event.target.name]: event.target.value 
     }); 
+
+  }
+
+  nextStep = (event) => {
+    event.preventDefault();
+    this.props.clickFunction(this.state.firstName, this.state.lastName, this.state.password, this.state.emailAddress);
   }
 
   render () {
@@ -48,7 +41,7 @@ export default class FirstPage extends React.Component {
         <Title>Welcome!</Title>
         <h3>Please fill out the following information to join:</h3>
         <Wrapper>
-          <form onSubmit={() => this.props.clickFunction(this.state,firstName, this.state.lastName, this.state.password,this.state.emailAddress)}>
+          <form onSubmit={this.nextStep}>
           <FormInput
             name="firstName"
             label="First Name"
@@ -56,7 +49,7 @@ export default class FirstPage extends React.Component {
             placeholder="First Name"
             value={this.state.firstName}
             autocomplete="given-name"
-            handleChange={this.handleChange}
+            handleChange={this.handleInputChange}
           />
           <FormInput
             name="lastName"
@@ -65,7 +58,7 @@ export default class FirstPage extends React.Component {
             placeholder="Last Name"
             value={this.state.lastName}
             autocomplete="family-name"
-            handleChange={this.handleChange}
+            handleChange={this.handleInputChange}
           />
           <FormInput
             name="password"
@@ -73,23 +66,25 @@ export default class FirstPage extends React.Component {
             type="password"
             placeholder="Password"
             value={this.state.password}
-            handleChange={this.handleChange}
+            handleChange={this.handleInputChange}
           />
           <FormInput
               name="emailAddress"
               label="Email"
               type="email"
               placeholder="Email"
-              value={this.state.email}
+              value={this.state.emailAddress}
               autocomplete="email"
-              handleChange={this.handleChange}
+              handleChange={this.handleInputChange}
             />
-            <NextButton
-              type="submit"
-              id="next-page-button"
-            >
-              Next
-            </NextButton>
+            <ButtonRow>
+              <NextButton
+                type="submit"
+                id="next-page-button"
+              >
+                Next
+              </NextButton>
+            </ButtonRow>
           </form>
         </Wrapper>
       </div>

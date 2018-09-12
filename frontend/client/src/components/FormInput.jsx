@@ -1,13 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Input from '../styled-components/Input.jsx';
-
-const Label = styled.label`
-  font-weight: bold;
-  display: block;
-  margin: 10px 0;
-  margin-left: 10px;
-`;
+import Label from '../styled-components/Label.jsx';
 
 const FormInput = ({ name, label, type, placeholder, value, handleChange }) => {
   return (

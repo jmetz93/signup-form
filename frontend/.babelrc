@@ -7,7 +7,7 @@
       "plugins": ["styled-components"]
     },
     "test": {
-      "presets": ["env", "react"],
+      "presets": ["env", "react", "stage-0"],
       "plugins": ["styled-components"]
     }
   }

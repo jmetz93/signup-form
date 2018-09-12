@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const NextButton = styled.button`
-  float: right;
+  float: left;
   width: 10%;
   padding: 7px 14px;
   font-size: 14px;

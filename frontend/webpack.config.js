@@ -1,7 +1,7 @@
-const path = require("path");
+const path = require('path');
 
-const SRC_DIR = path.join(__dirname, "/client/src");
-const DIST_DIR = path.join(__dirname, "/client/dist");
+const SRC_DIR = path.join(__dirname, '/client/src');
+const DIST_DIR = path.join(__dirname, '/client/dist');
 
 module.exports = {
   entry: {
@@ -18,10 +18,10 @@ module.exports = {
         include: SRC_DIR,
         use: [
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             query: {
-              presets: ["react", "es2015"],
-              plugins: ["transform-object-rest-spread"]
+              presets: ['react', 'es2015', 'stage-0'],
+              plugins: ['transform-object-rest-spread']
             }
           }
         ]
@@ -37,26 +37,4 @@ module.exports = {
   }
 };
 
-// module.exports = {
-//   entry: './client/src/index.jsx',
-//   module: {
-//     rules: [
-//       {
-//         test: /\.(js|jsx)$/,
-//         exclude: /node_modules/,
-//         use: ['babel-loader']
-//       }
-//     ]
-//   },
-//   resolve: {
-//     extensions: ['*', '.js', '.jsx']
-//   },
-//   output: {
-//     path: __dirname + '/client/dist',
-//     publicPath: '/',
-//     filename: 'bundle.js'
-//   },
-//   devServer: {
-//     contentBase: './client/dist'
-//   }
-// };
+
