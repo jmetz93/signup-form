@@ -63,7 +63,7 @@ typings/
 .next
 
 #Build generated
-dist/
+
 build/
 
 # Serverless generated files
