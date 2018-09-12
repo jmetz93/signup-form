@@ -6,6 +6,7 @@ const Label = styled.label`
   font-weight: bold;
   display: block;
   margin: 10px 0;
+  margin-left: 10px;
 `;
 
 const FormInput = ({ name, label, type, placeholder, value, handleChange }) => {
@@ -22,6 +23,7 @@ const FormInput = ({ name, label, type, placeholder, value, handleChange }) => {
           onChange={handleChange}
         >
       </Input>
+      
     </div>
   )
 }

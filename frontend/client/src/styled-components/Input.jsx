@@ -6,5 +6,6 @@ const Input = styled.input`
   font-family: "Oswald", sans-serif;
   line-height: 21px;
   margin: 10px 0;
+  margin-left: 10px;
 `
 export default Input;
