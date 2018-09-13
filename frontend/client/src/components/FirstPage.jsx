@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import validator from 'validator';
 import Title from '../styled-components/Title.jsx';
 import Wrapper from '../styled-components/Wrapper.jsx';
 import FormInput from './FormInput.jsx'; 
 import NextButton from '../styled-components/NextButton.jsx';
+import PopUpText from '../styled-components/PopUpText.jsx'
 
 const ButtonRow = styled.div`
   display: flex;
@@ -14,7 +16,7 @@ export default class FirstPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      requirementsFilled: false,
+      allValidInputs: false,
       firstName: this.props.firstName,
       lastName: this.props.lastName,
       password: this.props.password,
@@ -23,11 +25,21 @@ export default class FirstPage extends React.Component {
   }
 
   handleInputChange = (event) => {
-    console.log(event.target.value);
     this.setState({
       [event.target.name]: event.target.value 
-    }); 
+    }, () => this.validateAllInputs(this.state));
+  }
 
+  validateAllInputs = (state) => {
+    console.log('valid first: ', state.firstName.length > 0)
+    console.log('valid last: ', state.lastName.length > 0)
+    console.log('valid password: ', state.password.length >= 8)
+    console.log('email valid: ', validator.isEmail(state.emailAddress))
+    if (state.firstName.length > 0 && state.lastName.length > 0 && state.password.length >= 8 && validator.isEmail(state.emailAddress)) {
+      this.setState({
+        allValidInputs: true
+      })
+    }
   }
 
   nextStep = (event) => {
@@ -81,9 +93,11 @@ export default class FirstPage extends React.Component {
               <NextButton
                 type="submit"
                 id="next-page-button"
+                disabled={!this.state.allValidInputs}
               >
                 Next
               </NextButton>
+              {this.state.allValidInputs && <PopUpText>Hit Next to Continue!</PopUpText>}
             </ButtonRow>
           </form>
         </Wrapper>

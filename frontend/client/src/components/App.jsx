@@ -29,16 +29,18 @@ export default class App extends React.Component {
     });
   }
 
-  previousPage () {
+  previousPage = () => {
+    console.log('hey')
     this.setState({
       formSection: 'first'
     });
   }
 
-  finish (interest, phone) {
+  finish = (interest, phone) => {
     this.setState({
       interest: interest,
-      phone: phone
+      phone: phone,
+      formSection: 'finished'
     })
     this.enterPerson();
   }
@@ -48,7 +50,6 @@ export default class App extends React.Component {
   }
 
   render () {
-    console.log('state first: ', this.state.firstName)
     return (
       <div>
         {this.state.formSection === 'first' && 
@@ -60,7 +61,7 @@ export default class App extends React.Component {
         {this.state.formSection === 'second' && 
           <SecondPage interest={this.state.interest}
                       phone={this.state.phone}
-                      clickFuntion={this.finish}
+                      clickFunction={this.finish}
                       previous={this.previousPage} />}
         {this.state.formSection === 'finished' && 
           <Finished firstName={this.state.firstName}
