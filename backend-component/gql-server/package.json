@@ -1,5 +1,5 @@
 {
-  "name": "db",
+  "name": "gql-server",
   "private": true,
   "dependencies": {}
 }
