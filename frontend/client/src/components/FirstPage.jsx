@@ -31,10 +31,6 @@ export default class FirstPage extends React.Component {
   }
 
   validateAllInputs = (state) => {
-    console.log('valid first: ', state.firstName.length > 0)
-    console.log('valid last: ', state.lastName.length > 0)
-    console.log('valid password: ', state.password.length >= 8)
-    console.log('email valid: ', validator.isEmail(state.emailAddress))
     if (state.firstName.length > 0 && state.lastName.length > 0 && state.password.length >= 8 && validator.isEmail(state.emailAddress)) {
       this.setState({
         allValidInputs: true
@@ -82,7 +78,7 @@ export default class FirstPage extends React.Component {
           />
           <FormInput
               name="emailAddress"
-              label="Email"
+              label="Email (example@gmail.com)"
               type="email"
               placeholder="Email"
               value={this.state.emailAddress}

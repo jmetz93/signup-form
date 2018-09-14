@@ -3,7 +3,6 @@ import axios from 'axios';
 import FirstPage from './FirstPage.jsx';
 import SecondPage from './SecondPage.jsx';
 import Finished from './Finished.jsx';
-import Title from '../styled-components/Title.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -30,7 +29,6 @@ export default class App extends React.Component {
   }
 
   previousPage = () => {
-    console.log('hey')
     this.setState({
       formSection: 'first'
     });

@@ -4,7 +4,8 @@ import Title from '../styled-components/Title.jsx';
 import Wrapper from '../styled-components/Wrapper.jsx';
 
 const ListStyle = {
-  listStyle: "disc" 
+  listStyle: "disc",
+  fontWeight: "bold" 
 }
 
 const Finished = (props) => {

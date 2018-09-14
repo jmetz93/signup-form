@@ -1,8 +1,9 @@
 import React from 'react';
+import DropDown from './Dropdown.jsx';
+import FormInput from './FormInput.jsx';
 import styled from 'styled-components';
 import Title from '../styled-components/Title.jsx';
 import Wrapper from '../styled-components/Wrapper.jsx';
-import FormInput from './FormInput.jsx';
 import NextButton from '../styled-components/NextButton.jsx';
 import PreviousButton from '../styled-components/NextButton.jsx';
 import PopUpText from '../styled-components/PopUpText.jsx';
@@ -24,18 +25,24 @@ export default class SecondPage extends React.Component {
 
   handleInputChange = (event) => {
     const re = /^[0-9\b]+$/; //so only numbers can be entered into phone number box
-    if (event.target.value == '' || re.test(event.target.value)) {
+    console.log(event.target.name);
+    if (event.target.name === 'interest' || (event.target.name === 'phone' && (event.target.value === '' || re.test(event.target.value)))) {
       this.setState({
         [event.target.name]: event.target.value 
-      });
+      })
+      this.validateInput(event.target.value);
     }
-    this.validateInput(event.target.value);
+    
   }
 
   validateInput(phoneNumber) {
-    if (phoneNumber.toString().length === 10) {
+    if (phoneNumber.toString().length === 10 && !this.validInput) {
       this.setState({
         validInput: true
+      })
+    } else if (this.state.validInput) {
+      this.setState({
+        validInput: false
       })
     }
   }
@@ -56,9 +63,14 @@ export default class SecondPage extends React.Component {
         <h3>We just need a few more pieces of information:</h3>
         <Wrapper>
           <form onSubmit={this.finish}>
+            <DropDown
+              name="interest"
+              label="Interest"
+              onChange={this.handleInputChange}
+            />
             <FormInput 
               name="phone"
-              label="Phone Number(format: 1234567890)"
+              label="Phone Number(ex: 1234567890, maximum 10 characters)"
               type="tel"
               placeholder=""
               value={this.state.phone}
