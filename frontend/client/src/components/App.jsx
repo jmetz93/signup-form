@@ -14,26 +14,31 @@ export default class App extends React.Component {
       email: '',
       interest: 'happy',
       phone: '',
-      formSection: 'first' 
+      formSection: 'first',
+      firstPageValid: false, 
     };
   }
 
+  //Move on to second part of form
   nextPage = (firstName, lastName, password, email) => {
     this.setState({
       formSection: 'second',
       firstName: firstName,
       lastName: lastName,
       password: password,
-      email: email
+      email: email,
+      firstPageValid: true
     });
   }
 
+  //Move from second part of form back to first
   previousPage = () => {
     this.setState({
       formSection: 'first'
     });
   }
 
+  //Move to final page of form 
   finish = (interest, phone) => {
     this.setState({
       interest: interest,
@@ -43,19 +48,33 @@ export default class App extends React.Component {
     this.enterPerson();
   }
 
+  //Enter person into database
   enterPerson () {
-
+    const person = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      password: this.state.password,
+      email: this.state.email,
+      interest: this.state.interest,
+      phone: this.state.phone
+    }
+    axios.post('http://localhost:3000/graphiql', person)
+      .then((res) => {
+        console.log(this.state.firstName, ' has been successfully added: ', res);
+      })
   }
 
   render () {
     return (
       <div>
+        {/* Conditionally render each part of the form */}
         {this.state.formSection === 'first' && 
           <FirstPage firstName={this.state.firstName}
                     lastName={this.state.lastName}
                     password={this.state.password}
                     email={this.state.email} 
-                    clickFunction={this.nextPage} />}
+                    clickFunction={this.nextPage}
+                    valid={this.state.firstPageValid} />}
         {this.state.formSection === 'second' && 
           <SecondPage interest={this.state.interest}
                       phone={this.state.phone}

@@ -35,6 +35,7 @@ export default class SecondPage extends React.Component {
     
   }
 
+  //check for valid phonenumber since interest is filled by default
   validateInput(phoneNumber) {
     if (phoneNumber.toString().length === 10 && !this.validInput) {
       this.setState({
@@ -47,10 +48,12 @@ export default class SecondPage extends React.Component {
     }
   }
   
+  //move back to first page
   backToFirstPage = () => {
     this.props.previous()
   } 
 
+  //submit information and move to final page
   finish = (event) => {
     event.preventDefault();
       this.props.clickFunction(this.state.interest, this.state.phone);

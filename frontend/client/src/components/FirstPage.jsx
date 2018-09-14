@@ -16,7 +16,7 @@ export default class FirstPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allValidInputs: false,
+      allValidInputs: this.props.valid,
       firstName: this.props.firstName,
       lastName: this.props.lastName,
       password: this.props.password,
@@ -30,6 +30,7 @@ export default class FirstPage extends React.Component {
     }, () => this.validateAllInputs(this.state));
   }
 
+  //Check that all information is given
   validateAllInputs = (state) => {
     if (state.firstName.length > 0 && state.lastName.length > 0 && state.password.length >= 8 && validator.isEmail(state.emailAddress)) {
       this.setState({
@@ -38,6 +39,7 @@ export default class FirstPage extends React.Component {
     }
   }
 
+  //Send up to app component to render second page component
   nextStep = (event) => {
     event.preventDefault();
     this.props.clickFunction(this.state.firstName, this.state.lastName, this.state.password, this.state.emailAddress);
